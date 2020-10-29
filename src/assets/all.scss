@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/functions";
+@import "./helpers/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "/node_modules/chart.js/dist/Chart.css";
+
+@import "./stylesheets/utilities";
+@import "./stylesheets/collapse";
+@import "./_dashboard";
