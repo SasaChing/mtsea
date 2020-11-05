@@ -41,13 +41,8 @@
           <th width="100">狀態</th>
         </tr>
       </thead>
-      <tbody>
-        <tr
-          v-for="(item, key) in sortOrder"
-          :key="key"
-          v-if="orders.length"
-          :class="{'text-secondary': !item.is_paid}"
-        >
+      <tbody v-if="orders.length">
+        <tr v-for="(item, key) in sortOrder" :key="key" :class="{'text-secondary': !item.is_paid}">
           <td class="text-center">{{ item.create_at | date }}</td>
           <td class="text-center">
             <span v-text="item.user.email" v-if="item.user"></span>
@@ -85,8 +80,7 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   components: {
     Pagination
@@ -94,13 +88,13 @@ export default {
   methods: {
     getOrderlist(page = 1) {
       this.$store.dispatch("backgroundModules/getOrderlist", page);
-    },
-    openOrdertModal(item) {
-      // const vm = this;
-      // $("#delOrdertModal").modal("show");
-      // vm.tempProduct = Object.assign({}, item);
-      this.$store.dispatch("backgroundModules/openOrdertModal", item);
     }
+    // openOrdertModal(item) {
+    //   // const vm = this;
+    //   // $("#delOrdertModal").modal("show");
+    //   // vm.tempProduct = Object.assign({}, item);
+    //   this.$store.dispatch("backgroundModules/openOrdertModal", item);
+    // }
   },
   computed: {
     ...mapGetters("backgroundModules", ["pagination", "orders", "tempProduct"]),
@@ -110,7 +104,7 @@ export default {
       const vm = this;
       let newOrder = [];
       if (vm.orders.length) {
-        newOrder = vm.orders.sort((a, b) => {
+        newOrder = vm.orders.slice((a, b) => {
           const aIsPaid = a.is_paid ? 1 : 0;
           const bIsPaid = b.is_paid ? 1 : 0;
           return bIsPaid - aIsPaid;
