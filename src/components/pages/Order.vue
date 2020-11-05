@@ -73,21 +73,23 @@
       class="d-flex justify-content-center"
       :pages="pagination"
       @getThisPage="getOrderlist"
-      v-if="pagination.total_pages > 1"/>
+      v-if="pagination.total_pages > 1"
+    />
   </div>
 </template>
 
 <script>
 import $ from "jquery";
-import Pagination from '../Pagination';
-import { mapGetters, mapActions }  from 'vuex';
+import Pagination from "../Pagination";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+    };
   },
-  components:{
-    Pagination,
+  components: {
+    Pagination
   },
   methods: {
     getOrderlist(page = 1) {
@@ -97,12 +99,12 @@ export default {
       // const vm = this;
       // $("#delOrdertModal").modal("show");
       // vm.tempProduct = Object.assign({}, item);
-      this.$store.dispatch("backgroundModules/openOrdertModal", item)
-    },
+      this.$store.dispatch("backgroundModules/openOrdertModal", item);
+    }
   },
   computed: {
-    ...mapGetters('backgroundModules', ['pagination', 'orders', 'tempProduct']),
-    ...mapGetters(['isLoading']),
+    ...mapGetters("backgroundModules", ["pagination", "orders", "tempProduct"]),
+    ...mapGetters(["isLoading"]),
 
     sortOrder() {
       const vm = this;
@@ -115,7 +117,7 @@ export default {
         });
       }
       return newOrder;
-    },
+    }
   },
   created() {
     this.getOrderlist();

@@ -21,6 +21,11 @@ export default {
   components: {
     DashNavbar,
     DashSiderbar
+  },
+  created() {
+    const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)mtseatoken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    console.log('myCookie', myCookie);
+    this.$http.defaults.headers.common.Authorization = myCookie;
   }
 };
 </script>
